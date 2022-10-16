@@ -1,0 +1,111 @@
+SQL data cleaning and data summarizing
+
+1.	Check for and clean dirty data:
+non-uniform
+ 
+SELECT DISTINCT rating
+FROM film
+GROUP BY rating
+ 
+SELECT DISTINCT store_id
+FROM customer
+GROUP BY store_id
+ 
+duplicate data
+ 
+SELECT film_id, title, description, release_year, language_id, rental_duration,
+COUNT (*)
+FROM film
+GROUP BY film_id, title, description, release_year, language_id, rental_duration
+HAVING COUNT (*)>1
+ 
+SELECT customer_id, store_id, first_name, last_name, email, active,
+COUNT (*)
+FROM customer
+GROUP BY customer_id, store_id, first_name, last_name, email, active
+HAVING COUNT (*)>1
+ 
+missing values
+
+SELECT COUNT (film_id) AS Total_film_id_count,
+COUNT (title) AS Total_title_count,
+COUNT (description) AS Total_description_count,
+COUNT (release_year) AS Total_release_year_count,
+COUNT (language_id) AS Total_language_id_count,
+COUNT (rental_duration) AS Total_rental_duration_count,
+COUNT (rental_rate) AS Total_rental_rate_count,
+COUNT (length) AS Total_length_count,
+COUNT (replacement_cost) AS Total_replacement_cost_count,
+COUNT (rating) AS Total_rating_count,
+COUNT(*) AS Total_row_count
+FROM film
+ 
+SELECT COUNT (customer_id) AS Total_customer_id_count,
+COUNT (store_id) AS Total_store_id_count,
+COUNT (first_name) AS Total_first_name_count,
+COUNT (last_name) AS Total_last_name_count,
+COUNT (email) AS Total_email_count,
+COUNT (address_id) AS Total_address_id_count,
+COUNT(*) AS Total_row_count
+FROM customer
+
+
+2.	Summarize your data
+
+Numerical Film 
+
+SELECT MIN(rental_duration) AS Min_rent_duration,
+MAX(rental_duration) AS Max_rent_duration,
+AVG(rental_duration) AS AVG_rent_duration,
+MIN(rental_rate) AS Min_rental_rate,
+MAX(rental_rate) AS Max_rental_rate,
+AVG(rental_rate) AS AVG_rental_rate,
+MIN(length) AS Min_length,
+MAX(length) AS Max_length,
+AVG(length) AS AVG_length,
+MIN(replacement_cost) AS MIN_replacement_cost,
+MAX(replacement_cost) AS MAX_replacement_cost,
+AVG(replacement_cost) AS AVG_replacement_cost
+FROM film
+
+ 
+Non-numerical Film 
+
+SELECT MODE()WITHIN GROUP(ORDER BY title)
+AS modal_title,
+MODE()WITHIN GROUP(ORDER BY description)
+AS modal_description,
+MODE() WITHIN GROUP (ORDER BY release_year)
+AS modal_release_year,
+MODE() WITHIN GROUP (ORDER BY rating)
+AS modal_rating
+FROM film
+
+ 
+
+Numerical Customer
+
+SELECT MIN(customer_id) AS Min_customer_id,
+MAX(customer_id) AS Max_rent_duration,
+AVG(customer_id) AS AVG_customer_id,
+MIN(store_id) AS Min_store_id,
+MAX(store_id) AS Max_store_id,
+AVG(store_id) AS AVG_store_id,
+MIN(address_id) AS Min_address_id,
+MAX(address_id) AS Max_address_id,
+AVG(address_id) AS AVG_address_id,
+MIN(active) AS MIN_active,
+MAX(active) AS MAX_active,
+AVG(active) AS AVG_active
+FROM customer
+
+ 
+Non-Numerical Customer
+
+SELECT MODE()WITHIN GROUP(ORDER BY first_name)
+AS modal_first_name,
+MODE()WITHIN GROUP(ORDER BY last_name)
+AS modal_last_name,
+MODE() WITHIN GROUP (ORDER BY email)
+AS modal_email
+FROM customer
