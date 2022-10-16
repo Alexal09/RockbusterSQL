@@ -10,4 +10,5 @@ Data set
 There are 15 tables of data ranging from customer payment, customer information, rental information, film information, inventory, store and employee information.
 
 data source: [dvdrental.zip](https://github.com/Alexal09/RockbusterSQL/files/9794896/dvdrental.zip)
+
 tableau visualization: https://public.tableau.com/app/profile/alexandra.lindsay1619/viz/RockbusterStealthDataAnalysis_16618273091160/Story1?publish=yes
